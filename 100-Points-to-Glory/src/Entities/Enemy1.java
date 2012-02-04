@@ -9,12 +9,13 @@ import Game.ResourceManager;
 
 public class Enemy1 extends Component {
 
-	private static float SPEED = 0.1f;
 	private double angle;
+	private float speed;
 	
-	public Enemy1(String id, ResourceManager rm, EntityManager em) {
+	public Enemy1(String id, ResourceManager rm, EntityManager em, float speed) {
 		super(id, rm, em);
 		angle = 0;
+		this.speed = speed;
 	}
 
 	@Override
@@ -24,8 +25,8 @@ public class Enemy1 extends Component {
 		angle = posPlayer.sub(pos).getTheta() + 90;
 		
 		//Setting new Coordinates
-        pos.x += SPEED * delta * (float)Math.sin(Math.toRadians(angle));
-        pos.y -= SPEED * delta * (float)Math.cos(Math.toRadians(angle));
+        pos.x += speed * delta * (float)Math.sin(Math.toRadians(angle));
+        pos.y -= speed * delta * (float)Math.cos(Math.toRadians(angle));
         owner.setRotation((float)angle + 180);
 		
 		

@@ -10,6 +10,7 @@ import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
 import Entities.Enemy1;
+import Entities.EnemyXplode;
 import Entities.Entity;
 
 public class EntityManager {
@@ -89,17 +90,29 @@ public class EntityManager {
 	
 	public void enemyGeneratorUpdate(GameContainer gc, int delta) {
 		egTimeSince += delta;
-		if(egTimeSince >= egInterval) {
-			egTimeSince -= egInterval;
-			Entity enemy = new Entity("Enemy1");
-			enemy.setImage(rm.getImage32(0, 2));
-			double angle = Math.random()*Math.PI;
-			float x = gc.getWidth() *0.75f*(float)Math.sin(angle)+gc.getWidth()/2;
-			float y = gc.getHeight()*0.75f*(float)Math.cos(angle)+gc.getHeight()/2;
-			enemy.setPosition(new Vector2f(x,y));
-			enemy.AddComponent(new Enemy1("Enemy1Component", rm, this));
-			this.addEntity(enemy);
-		}
+//		if(egTimeSince >= egInterval) {
+//			egTimeSince -= egInterval;
+//			Entity enemy = new Entity("Enemy1");
+//			enemy.setImage(rm.getImage32(0, 2));
+//			double angle = Math.random()*Math.PI;
+//			float x = gc.getWidth() *0.75f*(float)Math.sin(angle)+gc.getWidth()/2;
+//			float y = gc.getHeight()*0.75f*(float)Math.cos(angle)+gc.getHeight()/2;
+//			enemy.setPosition(new Vector2f(x,y));
+//			enemy.AddComponent(new Enemy1("Enemy1Component", rm, this, 0.1f));
+//			this.addEntity(enemy);
+//		}
+//		if(egTimeSince >= egInterval) {
+//			egTimeSince -= egInterval;
+//			Entity enemy = new Entity("Enemy2");
+//			enemy.setImage(rm.getImage32(0, 3));
+//			double angle = Math.random()*Math.PI;
+//			float x = gc.getWidth() *0.75f*(float)Math.sin(angle)+gc.getWidth()/2;
+//			float y = gc.getHeight()*0.75f*(float)Math.cos(angle)+gc.getHeight()/2;
+//			enemy.setPosition(new Vector2f(x,y));
+//			enemy.AddComponent(new Enemy1("Enemy1Component", rm, this, 0.1f));
+//			enemy.AddComponent(new EnemyXplode("EnemyXplodeComponent", rm, this, 6000));
+//			this.addEntity(enemy);
+//		}
 	}
 	
 	public void checkCollisions() {
