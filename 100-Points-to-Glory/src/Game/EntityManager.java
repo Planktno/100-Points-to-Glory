@@ -92,7 +92,7 @@ public class EntityManager {
 		egTimeSince += delta;
 //		if(egTimeSince >= egInterval) {
 //			egTimeSince -= egInterval;
-//			Entity enemy = new Entity("Enemy1");
+//			Entity enemy = new Entity("Enemy");
 //			enemy.setImage(rm.getImage32(0, 2));
 //			double angle = Math.random()*Math.PI;
 //			float x = gc.getWidth() *0.75f*(float)Math.sin(angle)+gc.getWidth()/2;
@@ -103,7 +103,7 @@ public class EntityManager {
 //		}
 		if(egTimeSince >= egInterval) {
 			egTimeSince -= egInterval;
-			Entity enemy = new Entity("Enemy2");
+			Entity enemy = new Entity("Enemy");
 			enemy.setImage(rm.getImage32(0, 3));
 			double angle = Math.random()*Math.PI;
 			float x = gc.getWidth() *0.75f*(float)Math.sin(angle)+gc.getWidth()/2;
@@ -119,7 +119,7 @@ public class EntityManager {
 		//Player to Bullets, Enemy1
 		Entity player = this.getEntity("Player");
 		for(Entity e : entities) {
-			if(e.getId().equals("Bullet") || e.getId().equals("Enemy1")) {
+			if(e.getId().equals("Bullet") || e.getId().equals("Enemy")) {
 				if(checkCollision(player, e)){
 					lives--;
 					this.removeEntity(e);
@@ -128,7 +128,7 @@ public class EntityManager {
 		}
 		//Enemies to Bullets
 		for(Entity e : entities) {
-			if(e.getId().equals("Enemy1")) {
+			if(e.getId().equals("Enemy")) {
 				for(Entity f : entities) {
 					if(f.getId().equals("Bullet")) {
 						if(checkCollision(e,f)) {

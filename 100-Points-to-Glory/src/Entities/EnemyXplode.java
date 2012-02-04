@@ -11,10 +11,12 @@ public class EnemyXplode extends Component {
 
 	private int time=0, pictime=0;
 	private boolean pictoggle=true;
+	private int bullets;
 	
 	public EnemyXplode(String id, ResourceManager rm, EntityManager em, int time) {
 		super(id, rm, em);
 		this.time=time;
+		bullets = 6;
 	}
 
 	@Override
@@ -32,16 +34,24 @@ public class EnemyXplode extends Component {
         }
         
         time-=delta;
-        if (time<=0){
-        	
-        	em.removeEntity(owner);
-        }
-        else
-        	if (time<=1500){
-        		owner.setImage(rm.getImage32(2, 3)); 	//1,5 sec before explosion pic
-        	}
         
-		
+        if(time <= 0) {
+        	for(int i = 0; i < bullets; i++) {
+            	Entity bullet = new Entity("Bullet");
+            	Vector2f pos = owner.getPosition();
+            	float angle = 360*i/(float)bullets;
+            	bullet.setImage(rm.getImage04(2, 9));
+            	float addXBullet =  20 * (float)Math.sin(Math.toRadians(angle));
+            	float addYBullet = -20 * (float)Math.cos(Math.toRadians(angle));
+            	bullet.setPosition(new Vector2f(pos.getX()+addXBullet, pos.getY()+addYBullet));
+            	bullet.AddComponent(new LineMovement("BulletMovement", 0.5f, angle, true));
+            	em.addEntity(bullet);
+        	}
+        	em.removeEntity(owner);
+        } else if(time <= 500) {
+        	owner.setImage(rm.getImage32(3, 3));
+        } else if(time <= 1500) {
+        	owner.setImage(rm.getImage32(2,3));
+        }
 	}
-
 }

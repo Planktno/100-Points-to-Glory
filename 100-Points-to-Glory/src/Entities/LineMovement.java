@@ -9,14 +9,12 @@ public class LineMovement extends Component {
 	private float speed;
 	private float angle;
 	private boolean bounceOnEdge;
-	private boolean deleteOnEdge;
 	
 	public LineMovement(String id, float speed, float angle, boolean bounceOnEdge) {
 		super(id);
 		this.speed = speed;
 		this.angle = angle;
 		this.bounceOnEdge = bounceOnEdge;
-		this.deleteOnEdge = deleteOnEdge;
 	}
 
 	@Override
