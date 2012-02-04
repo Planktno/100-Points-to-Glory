@@ -9,14 +9,18 @@ import Game.ResourceManager;
 
 public class EnemyXplode extends Component {
 
-	private int time=0, pictime=0;
-	private boolean pictoggle=true;
+
+	private int time;
+	private int pictime;
+	private boolean pictoggle;
 	private int bullets;
 	
 	public EnemyXplode(String id, ResourceManager rm, EntityManager em, int time) {
 		super(id, rm, em);
 		this.time=time;
 		bullets = 6;
+		time=pictime=0;
+		pictoggle=true;
 	}
 
 	@Override
