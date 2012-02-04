@@ -14,7 +14,7 @@ public class EnemyXplode extends Component {
 	private int time=0, pictime=0;
 	private boolean pictoggle=true;
 	
-	public EnemyXplode(String id, ResourceManager rm, EntityManager em, time) {
+	public EnemyXplode(String id, ResourceManager rm, EntityManager em, int time) {
 		super(id, rm, em);
 		this.time=time;
 		angle = 0;
