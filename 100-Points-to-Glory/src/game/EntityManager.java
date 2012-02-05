@@ -47,13 +47,25 @@ public class EntityManager {
 	private int timeDisplayed;
 	private static String[] messages = {
 		"Loser",
-		"You are so bad",
 		"You Mom could do this better than you",
-		"Again?!?!",
-		"Trollollollollollollollollollollollol",
 		"Come on, was that necessary?",
 		"N00b",
-		"Seriously, n00b!!!"
+		"Seriously, n00b!!!",
+		"I knew a guy with no hands and he got passed that stage",
+		"Even your webcam says you are a loser",
+		"Is it a bird? Is it a plane? No you suck at this game",
+		"I hope you are doing better in real life",
+		"Did you find your pilot's license in a cereal box?",
+		"I once was as bad as you are now, then I took an arrow to my knee AND GOT BETTER",
+		"No disrespect, but you should not be allowed to operate a computer",
+		"Have you got some neurological disorder?",
+		"I've seen flummies bouncing on keyboards getting better scores",
+		"Again?!?!",
+		"Knock, Knock - Who's there? - You suck",
+		"Are you kidding me?",
+		"Just leave this to people who know how to use 4 (!!!) fingers",
+		"I hope you aren't ugly, because you won't get rich with your skills",
+		"NASA called, they want you to never get near them"
 	};
 	
 	public EntityManager(){
