@@ -83,7 +83,7 @@ public class EntityManager {
 		
 		displayMessage = false;
 		messageIterator = 0;
-		timeToDisplay = 1000;
+		timeToDisplay = 2000;
 		timeDisplayed = 0;
 	}
 	
