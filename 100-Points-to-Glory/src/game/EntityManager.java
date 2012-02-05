@@ -49,7 +49,11 @@ public class EntityManager {
 		"Loser",
 		"You are so bad",
 		"You Mom could do this better than you",
-		"Again?!?!"
+		"Again?!?!",
+		"Trollollollollollollollollollollollol",
+		"Come on, was that necessary?",
+		"N00b",
+		"Seriously, n00b!!!"
 	};
 	
 	public EntityManager(){
