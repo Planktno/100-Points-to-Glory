@@ -4,6 +4,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
+import Game.Camera;
+
 public class EnemyMetroid extends Component {
 
 	private float speed;
@@ -19,7 +21,7 @@ public class EnemyMetroid extends Component {
 	}
 
 	@Override
-	public void update(GameContainer gc, StateBasedGame sb, int delta) {
+	public void update(GameContainer gc, StateBasedGame sb, int delta, Camera cam) {
 		Vector2f pos = owner.getPosition();
 		pos.x += speed * delta * (float) Math.sin(Math.toRadians(angle));
 		pos.y -= speed * delta * (float) Math.cos(Math.toRadians(angle));

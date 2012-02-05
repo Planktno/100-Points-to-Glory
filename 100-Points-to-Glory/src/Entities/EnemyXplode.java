@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
+import Game.Camera;
 import Game.EntityManager;
 import Game.ResourceManager;
 
@@ -24,7 +25,7 @@ public class EnemyXplode extends Component {
 	}
 
 	@Override
-	public void update(GameContainer gc, StateBasedGame sb, int delta) {
+	public void update(GameContainer gc, StateBasedGame sb, int delta, Camera cam) {
         
         //special addings for exploding MOFOers
         pictime+=delta;

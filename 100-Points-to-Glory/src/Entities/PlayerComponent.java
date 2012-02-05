@@ -5,6 +5,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
+import Game.Camera;
 import Game.EntityManager;
 import Game.ResourceManager;
 
@@ -32,7 +33,7 @@ public class PlayerComponent extends Component{
 	}
 	
 	@Override
-	public void update(GameContainer gc, StateBasedGame sb, int delta) {
+	public void update(GameContainer gc, StateBasedGame sb, int delta, Camera cam) {
 		Input input = gc.getInput();
 		
 		//ACCeleration and braking
@@ -74,20 +75,20 @@ public class PlayerComponent extends Component{
 		//If against Wall
         if(speed > 0) {
         	if(pos.getX() <= 0 && angle < 0) 				angle = -angle;
-            if(pos.getX() >= gc.getWidth() && angle > 0) 	angle = -angle;
+            if(pos.getX() >= cam.getWidth() && angle > 0) 	angle = -angle;
 
             if(pos.getY() <= 0 && angle >= 0 && angle < 90) angle = -(angle - 180);
             if(pos.getY() <= 0 && angle < 0 && angle > -90) angle = -(angle + 180);
-            if(pos.getY() >= gc.getHeight() && angle > 90) 	angle = -(angle - 180);
-            if(pos.getY() >= gc.getHeight() && angle < -90) angle = -(angle + 180);
+            if(pos.getY() >= cam.getHeight() && angle > 90) 	angle = -(angle - 180);
+            if(pos.getY() >= cam.getHeight() && angle < -90) angle = -(angle + 180);
         } else {
            	if(pos.getX() <= 0 && angle > 0) 				angle = -angle;
-            if(pos.getX() >= gc.getWidth() && angle < 0) 	angle = -angle;
+            if(pos.getX() >= cam.getWidth() && angle < 0) 	angle = -angle;
 
             if(pos.getY() <= 0 && angle > 90) angle = -(angle - 180);
             if(pos.getY() <= 0 && angle < -90) angle = -(angle + 180);
-            if(pos.getY() >= gc.getHeight() && angle >= 0 && angle < 90) angle = -(angle - 180);
-            if(pos.getY() >= gc.getHeight() && angle < 0 && angle > -90) angle = -(angle + 180);
+            if(pos.getY() >= cam.getHeight() && angle >= 0 && angle < 90) angle = -(angle - 180);
+            if(pos.getY() >= cam.getHeight() && angle < 0 && angle > -90) angle = -(angle + 180);
         }
 
         

@@ -3,6 +3,7 @@ package Entities;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.state.StateBasedGame;
 
+import Game.Camera;
 import Game.EntityManager;
 import Game.ResourceManager;
 
@@ -31,6 +32,6 @@ public abstract class Component {
 		this.owner = owner;
 	}
 	
-	public abstract void update(GameContainer gc, StateBasedGame sb, int delta);
+	public abstract void update(GameContainer gc, StateBasedGame sb, int delta, Camera cam);
 	
 }

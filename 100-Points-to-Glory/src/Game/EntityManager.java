@@ -84,7 +84,7 @@ public class EntityManager {
 		toRemove.clear();
 		
 		for(Entity e : entities) {
-			e.update(gc, sb, delta);
+			e.update(gc, sb, delta, cam);
 		}
 	}
 	

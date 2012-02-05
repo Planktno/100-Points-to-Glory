@@ -83,16 +83,17 @@ public class Entity {
     	this.height = img.getHeight();
     }
     
-    public void update(GameContainer gc, StateBasedGame sb, int delta) {
+    public void update(GameContainer gc, StateBasedGame sb, int delta, Camera cam) {
     	for(Component component : components) {
-    		component.update(gc, sb, delta);
+    		component.update(gc, sb, delta, cam);
     	}
     }
     
     public void render(GameContainer gc, StateBasedGame sb, Graphics gr, Camera cam) {
     	Image scaled = img.getScaledCopy(cam.getScale());
     	scaled.setRotation(rotation);
-    	scaled.draw((pos.getX()-width/2)*cam.getScale(),(pos.getY()-height/2)*cam.getScale());
+    	Vector2f newpos = new Vector2f((pos.getX()-width/2)*cam.getScale(),(pos.getY()-height/2)*cam.getScale());
+    	scaled.draw(newpos.getX() + cam.getOffset().getX(), newpos.getY());
 //    	img.setRotation(rotation);
 //    	img.draw(pos.getX()-width/2, pos.getY()-height/2);
     }
