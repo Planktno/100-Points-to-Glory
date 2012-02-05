@@ -4,6 +4,8 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.ScalableGame;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
@@ -41,6 +43,8 @@ public class MyselfVsMe extends BasicGame {
 		player.setImage(rm.getImage32(0, 0));
 		player.AddComponent(new PlayerComponent("PlayerComponent", rm, em));
 		em.addEntity(player);
+		rm.getNyan().play();
+		
 	}
 	
 	@Override
