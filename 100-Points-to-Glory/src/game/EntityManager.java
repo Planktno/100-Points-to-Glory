@@ -57,9 +57,9 @@ public class EntityManager {
 		toAdd 	 = new ArrayList<Entity>();
 		toRemove = new ArrayList<Entity>();
 		
-		score = 99;
+		score = 0;
 		suicide = 0;
-		level = 4;
+		level = 1;
 		lives = 100;
 		glory = false;
 		
