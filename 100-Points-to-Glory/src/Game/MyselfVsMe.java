@@ -4,6 +4,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.ScalableGame;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
@@ -16,6 +17,7 @@ public class MyselfVsMe extends BasicGame {
 	private static int HEIGHT = 800;
 	private float scale;
 	
+	private Camera cam;
 	private ResourceManager rm;
 	private EntityManager em;
 	
@@ -23,8 +25,8 @@ public class MyselfVsMe extends BasicGame {
 		super("Myself Vs. Me - A Game by Planktno");
 	}
 	
-	public void setScale(float scale) {
-		
+	public void setCamera(int normalWidth, int normalHeight, int screenWidth, int screenHeight) {
+		cam = new Camera(normalWidth, normalHeight, screenWidth, screenHeight);
 	}
 
 	@Override
@@ -47,7 +49,7 @@ public class MyselfVsMe extends BasicGame {
 		rm.getBackground().draw(0, 0);
 		
 		//Draw all Entities
-		em.render(gc, null, gr);
+		em.render(gc, null, gr, cam);
 		
 		//Draw Strings of relevant information
 		gr.drawString("Score: " + em.getScore() , gc.getWidth()-120, 10);
@@ -57,7 +59,7 @@ public class MyselfVsMe extends BasicGame {
 
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
-		em.update(gc, null, delta);
+		em.update(gc, null, delta, cam);
 	}
 	
 	
@@ -67,9 +69,10 @@ public class MyselfVsMe extends BasicGame {
 	 * @throws SlickException 
 	 */
 	public static void main(String[] args) throws SlickException {
-		AppGameContainer app = new AppGameContainer( new MyselfVsMe() );
-		 
-        app.setDisplayMode(WIDTH, HEIGHT, false);
+		MyselfVsMe game = new MyselfVsMe();
+		AppGameContainer app = new AppGameContainer( game );
+		game.setCamera(WIDTH, HEIGHT, app.getScreenWidth(), app.getScreenHeight());
+        app.setDisplayMode(app.getScreenWidth(), app.getScreenHeight(), true);
         app.setShowFPS(false);
         app.start();
 	}

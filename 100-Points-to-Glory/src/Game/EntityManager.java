@@ -74,9 +74,9 @@ public class EntityManager {
 		return score;
 	}
 	
-	public void update(GameContainer gc, StateBasedGame sb, int delta) {
+	public void update(GameContainer gc, StateBasedGame sb, int delta, Camera cam) {
 		checkCollisions();
-		enemyGeneratorUpdate(gc, delta);
+		enemyGeneratorUpdate(gc, delta, cam);
 		
 		entities.addAll(toAdd);
 		toAdd.clear();
@@ -88,34 +88,34 @@ public class EntityManager {
 		}
 	}
 	
-	public void enemyGeneratorUpdate(GameContainer gc, int delta) {
+	public void enemyGeneratorUpdate(GameContainer gc, int delta, Camera cam) {
 		egTimeSince += delta;
 		if(egTimeSince >= egInterval) {
 			double rnd = Math.random();
-				 if(rnd >= 0.2) addEnemy1(gc);
-			else if(rnd < 0.2)	addEnemyXPlode(gc);
+				 if(rnd >= 0.2) addEnemy1(cam);
+			else if(rnd < 0.2)	addEnemyXPlode(cam);
 		}
 	}
 	
-	public void addEnemy1(GameContainer gc) {
+	public void addEnemy1(Camera cam) {
 		egTimeSince -= egInterval;
 		Entity enemy = new Entity("Enemy");
 		enemy.setImage(rm.getImage32(0, 2));
 		double angle = Math.random()*Math.PI;
-		float x = gc.getWidth() *0.75f*(float)Math.sin(angle)+gc.getWidth()/2;
-		float y = gc.getHeight()*0.75f*(float)Math.cos(angle)+gc.getHeight()/2;
+		float x = cam.getWidth() *0.75f*(float)Math.sin(angle)+cam.getWidth()/2;
+		float y = cam.getHeight()*0.75f*(float)Math.cos(angle)+cam.getHeight()/2;
 		enemy.setPosition(new Vector2f(x,y));
 		enemy.AddComponent(new Enemy1("Enemy1Component", rm, this, 0.1f));
 		this.addEntity(enemy);
 	}
 	
-	public void addEnemyXPlode(GameContainer gc) {
+	public void addEnemyXPlode(Camera cam) {
 		egTimeSince -= egInterval;
 		Entity enemy = new Entity("Enemy");
 		enemy.setImage(rm.getImage32(0, 3));
 		double angle = Math.random()*Math.PI;
-		float x = gc.getWidth() *0.75f*(float)Math.sin(angle)+gc.getWidth()/2;
-		float y = gc.getHeight()*0.75f*(float)Math.cos(angle)+gc.getHeight()/2;
+		float x = cam.getWidth() *0.75f*(float)Math.sin(angle)+cam.getWidth()/2;
+		float y = cam.getHeight()*0.75f*(float)Math.cos(angle)+cam.getHeight()/2;
 		enemy.setPosition(new Vector2f(x,y));
 		enemy.AddComponent(new Enemy1("Enemy1Component", rm, this, 0.05f));
 		enemy.AddComponent(new EnemyXplode("EnemyXplodeComponent", rm, this, 10000));
@@ -174,9 +174,9 @@ public class EntityManager {
 		return mask;
 	}
 	
-	public void render(GameContainer gc, StateBasedGame sb, Graphics gr) {
+	public void render(GameContainer gc, StateBasedGame sb, Graphics gr, Camera cam) {
 		for(Entity e : entities) {
-			e.render(gc, sb, gr);
+			e.render(gc, sb, gr, cam);
 		}
 	}
 
