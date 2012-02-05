@@ -14,7 +14,7 @@ public class Entity {
 	
 	private Image img;
 	private Vector2f pos;
-	private float scale, rotation;
+	private float rotation;
 	private int width, height;
 
 	private ArrayList<Component> components;
@@ -25,7 +25,6 @@ public class Entity {
 		components = new ArrayList<Component>();
 		
 		pos = new Vector2f(0,0);
-		scale = 1;
 		rotation = 0;
 		height = 0;
 		width = 0;
@@ -46,10 +45,6 @@ public class Entity {
 	
 	public Vector2f getPosition() {
 		return pos;
-	}
-	
-	public float getScale() {
-		return scale;
 	}
 	
 	public float getRotation() {
@@ -78,10 +73,6 @@ public class Entity {
  
     public void setRotation(float rotate) {
         rotation = rotate;
-    }
- 
-    public void setScale(float scale) {
-    	this.scale = scale;
     }
     
     public void setImage(Image img) {

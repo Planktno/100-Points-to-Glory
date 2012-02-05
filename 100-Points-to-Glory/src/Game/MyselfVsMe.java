@@ -12,14 +12,19 @@ import Entities.PlayerComponent;
 
 public class MyselfVsMe extends BasicGame {
 
-	private static int WIDTH = 1200;
+	private static int WIDTH = 1024;
 	private static int HEIGHT = 800;
+	private float scale;
 	
 	private ResourceManager rm;
 	private EntityManager em;
 	
 	public MyselfVsMe() {
 		super("Myself Vs. Me - A Game by Planktno");
+	}
+	
+	public void setScale(float scale) {
+		
 	}
 
 	@Override

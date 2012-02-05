@@ -27,7 +27,7 @@ public class Enemy1 extends Component {
 		//Setting new Coordinates
         pos.x += speed * delta * (float)Math.sin(Math.toRadians(angle));
         pos.y -= speed * delta * (float)Math.cos(Math.toRadians(angle));
-        owner.setRotation((float)angle + 180);
+        owner.setRotation((float)angle);
 		
 		
 	}
