@@ -41,6 +41,7 @@ public class EnemyXplode extends Component {
         time-=delta;
         
         if(time <= 0) {
+        	rm.getExplosion().play();
         	for(int i = 0; i < bullets; i++) {
             	Entity bullet = new Entity("Enemy Bullet");
             	Vector2f pos = owner.getPosition();

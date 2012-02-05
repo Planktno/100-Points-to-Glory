@@ -11,13 +11,17 @@ public class ResourceManager {
 	Image background;
 	Music nyan;
 	Sound laser;
+	Sound xplode;
+	Sound levelUp;
 
 	public ResourceManager() {
 		try {
 			sprites = new Image("data/sprites.png");
 			background = new Image("data/background.png");
 			nyan = new Music("data/nyc.ogg", false);
-			laser = new Sound("data/laser2.ogg");
+			laser = new Sound("data/Laser.wav");
+			xplode = new Sound("data/Explosion.ogg");
+			levelUp = new Sound("data/LevelUp.ogg");
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -41,6 +45,14 @@ public class ResourceManager {
 	
 	public Sound getLaser() {
 		return laser;
+	}
+	
+	public Sound getExplosion() {
+		return xplode;
+	}
+	
+	public Sound getLevelUp() {
+		return levelUp;
 	}
 
 	public Image getBackground() {

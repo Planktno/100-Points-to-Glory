@@ -25,6 +25,8 @@ public class Enemy007 extends Component {
         if (time>=10000/fireRate){
         	time=0;
         	
+        	rm.getLaser().play();
+        	
         	Entity bullet = new Entity("Enemy Bullet");
         	Vector2f pos = owner.getPosition();
     		Vector2f posPlayer = new Vector2f(em.getEntity("Player").getPosition());

@@ -47,6 +47,10 @@ public class Entity {
 		components.removeAll(remove);
 	}
 	
+	public void removeComponents() {
+		components.clear();
+	}
+	
 	public Component getComponent(String id) {
 		for(Component comp : components) {
 			if(comp.getId().equalsIgnoreCase(id))

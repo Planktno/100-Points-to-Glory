@@ -4,6 +4,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
@@ -21,12 +22,19 @@ public class MyselfVsMe extends BasicGame {
 	private ResourceManager rm;
 	private EntityManager em;
 	
+	private int highscore;
+	
 	public MyselfVsMe() {
 		super("Myself Vs. Me - A Game by Planktno & Diko");
+		highscore = 0;
 	}
 	
 	public void setCamera(int normalWidth, int normalHeight, int screenWidth, int screenHeight) {
 		cam = new Camera(normalWidth, normalHeight, screenWidth, screenHeight);
+	}
+	
+	public void setHighscore(int score) {
+		if(score > highscore) highscore = score;
 	}
 
 	@Override
@@ -43,7 +51,7 @@ public class MyselfVsMe extends BasicGame {
 		player.addComponent(new TrailMaker("Player Trail Maker", rm, em));
 		player.addComponent(new PlayerWeapon1("Weapon1", rm, em));
 		em.addEntity(player);
-		rm.getNyan().play();	
+		rm.getNyan().loop();	
 	}
 	
 	@Override
@@ -55,14 +63,16 @@ public class MyselfVsMe extends BasicGame {
 		em.render(gc, null, gr, cam);
 		
 		//Draw Strings of relevant information
-		gr.drawString("Score: " + em.getScore() , cam.getOffset().getX()+cam.getWidth()*cam.getScale()-120, 10);
-		gr.drawString("Level: " + em.getLevel() , cam.getOffset().getX()+cam.getWidth()*cam.getScale()-220, 10);
+		gr.drawString("Score:   " + em.getScore() , cam.getOffset().getX()+cam.getWidth()*cam.getScale()-140, 10);
+		gr.drawString("Suicide: " + em.getSuicide() , cam.getOffset().getX()+cam.getWidth()*cam.getScale()-140, 40);
+		gr.drawString("Level: " + em.getLevel() , cam.getOffset().getX()+cam.getWidth()*cam.getScale()-240, 10);
 		gr.drawString("Lives: " + em.getLives() , cam.getOffset().getX()+10, 10);
 	}
 
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
 		em.update(gc, null, delta, cam);
+		if(gc.getInput().isKeyPressed(Input.KEY_P)) this.init(gc);
 	}
 	
 	

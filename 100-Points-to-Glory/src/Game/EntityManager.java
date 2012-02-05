@@ -11,9 +11,9 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import Entities.Enemy007;
 import Entities.Enemy1;
-import Entities.EnemyMetroid;
 import Entities.EnemyXplode;
 import Entities.Entity;
+import Entities.LineMovement;
 import Entities.PlayerWeapon2;
 import Entities.PlayerWeapon3;
 import Entities.PlayerWeapon4;
@@ -31,8 +31,13 @@ public class EntityManager {
 	private int suicide;
 	private int level;
 	private int lives;
+	private boolean glory;
 	
-	private static int egInterval = 3000;
+	private static int egInterval1 = 3000;
+	private static int egInterval2 = 2500;
+	private static int egInterval3 = 2000;
+	private static int egInterval4 = 1750;
+	private static int egInterval5 = 1250;
 	private int egTimeSince;
 	
 	private boolean displayMessage;
@@ -51,10 +56,11 @@ public class EntityManager {
 		toAdd 	 = new ArrayList<Entity>();
 		toRemove = new ArrayList<Entity>();
 		
-		score = 0;
+		score = 99;
 		suicide = 0;
-		level = 1;
+		level = 4;
 		lives = 100;
+		glory = false;
 		
 		egTimeSince = 0;
 		
@@ -98,8 +104,12 @@ public class EntityManager {
 		return score;
 	}
 	
+	public int getSuicide() {
+		return suicide;
+	}
+	
 	public void update(GameContainer gc, StateBasedGame sb, int delta, Camera cam) {
-		checkCollisions();
+		checkCollisions(cam);
 		enemyGeneratorUpdate(gc, delta, cam);
 		
 		entities.addAll(toAdd);
@@ -128,17 +138,56 @@ public class EntityManager {
 	
 	public void enemyGeneratorUpdate(GameContainer gc, int delta, Camera cam) {
 		egTimeSince += delta;
-		if(egTimeSince >= egInterval) {
-			double rnd = Math.random();
-				 if(rnd <= 0.65) addEnemy1(cam);
-			else if(rnd <= 0.85) addEnemyXPlode(cam);
-			else if(rnd <= 0.90) addEnemyMetroid(cam);
-			else if(rnd <= 1.00) addEnemy007(cam);
+		//if(egTimeSince >= egInterval) {
+		double rnd = Math.random();
+		
+		switch(level){
+		case 1: if(egTimeSince >= egInterval1){
+					egTimeSince -= egInterval1;
+						 if(rnd <= 0.90) addEnemy1(cam);
+					else if(rnd <= 1.00) addEnemyXPlode(cam);
+					else if(rnd <= 0.00) addEnemyMetroid(cam);
+					else if(rnd <= 0.00) addEnemy007(cam);
+				}
+				break;	 
+		case 2: if(egTimeSince >= egInterval2){
+					egTimeSince -= egInterval2;
+						 if(rnd <= 0.70) addEnemy1(cam);
+					else if(rnd <= 0.90) addEnemyXPlode(cam);
+					else if(rnd <= 0.00) addEnemyMetroid(cam);
+					else if(rnd <= 1.00) addEnemy007(cam);
+				}
+				break;	
+		case 3: if(egTimeSince >= egInterval3){
+					egTimeSince -= egInterval3;
+						 if(rnd <= 0.50) addEnemy1(cam);
+					else if(rnd <= 0.50) addEnemyXPlode(cam);
+					else if(rnd <= 0.80) addEnemyMetroid(cam);
+					else if(rnd <= 1.00) addEnemy007(cam);
+				}
+				break;	
+		case 4: if(egTimeSince >= egInterval4){
+					egTimeSince -= egInterval4;
+						 if(rnd <= 0.40) addEnemy1(cam);
+					else if(rnd <= 0.70) addEnemyXPlode(cam);
+					else if(rnd <= 0.80) addEnemyMetroid(cam);
+					else if(rnd <= 1.00) addEnemy007(cam);
+				}
+				break;	
+		case 5: if(egTimeSince >= egInterval5){
+					egTimeSince -= egInterval5;
+					 	 if(rnd <= 0.20) addEnemy1(cam);
+					else if(rnd <= 0.40) addEnemyXPlode(cam);
+					else if(rnd <= 0.60) addEnemyMetroid(cam);
+					else if(rnd <= 0.80) addEnemy007(cam);
+					else if(rnd <= 1.00) addGlory(cam);
+				}
+				break;	
+
 		}
 	}
 	
 	public void addEnemy1(Camera cam) {
-		egTimeSince -= egInterval;
 		Entity enemy = new Entity("Enemy");
 		enemy.setImage(rm.getImage32(0, 2));
 		double angle = Math.random()*Math.PI;
@@ -151,7 +200,6 @@ public class EntityManager {
 	}
 	
 	public void addEnemyXPlode(Camera cam) {
-		egTimeSince -= egInterval;
 		Entity enemy = new Entity("Enemy");
 		enemy.setImage(rm.getImage32(0, 3));
 		double angle = Math.random()*Math.PI;
@@ -164,7 +212,6 @@ public class EntityManager {
 	}
 	
 	public void addEnemyMetroid(Camera cam) {
-		egTimeSince -= egInterval;
 		Entity enemy = new Entity("Metroid");
 		enemy.setImage(rm.getImage(32, 32, 64, 64));
 		double angleOfScreen = Math.random()*Math.PI;
@@ -174,12 +221,11 @@ public class EntityManager {
 		Vector2f posPlayer = new Vector2f(this.getEntity("Player").getPosition());
 		float angleToPlayer = (float)posPlayer.sub(pos).getTheta() + 90;
 		enemy.setPosition(pos);
-		enemy.addComponent(new EnemyMetroid("EnemyMetroid", 0.01f, angleToPlayer, false));
+		enemy.addComponent(new LineMovement("Enemy Metroid Movement", 0.02f, angleToPlayer, true));
 		this.addEntity(enemy);
 	}
 	
 	public void addEnemy007(Camera cam) {
-		egTimeSince -= egInterval;
 		Entity enemy = new Entity("Enemy");
 		enemy.setImage(rm.getImage32(1, 0));
 		double angle = Math.random()*Math.PI;
@@ -192,19 +238,42 @@ public class EntityManager {
 		this.addEntity(enemy);
 	}
 	
-	public void checkCollisions() {
+	public void addGlory(Camera cam) {
+		Entity glory = new Entity("Glory");
+		glory.setImage(rm.getImage32(2, 0));
+		double angleOfScreen = Math.random()*Math.PI;
+		float x = cam.getWidth() *0.75f*(float)Math.sin(angleOfScreen)+cam.getWidth()/2;
+		float y = cam.getHeight()*0.75f*(float)Math.cos(angleOfScreen)+cam.getHeight()/2;
+		Vector2f pos = new Vector2f(x, y);
+		Vector2f posPlayer = new Vector2f(this.getEntity("Player").getPosition());
+		float angleToPlayer = (float)posPlayer.sub(pos).getTheta() + 90;
+		glory.setPosition(pos);
+		glory.addComponent(new LineMovement("Glory Movement", 0.1f, angleToPlayer, true));
+		this.addEntity(glory);
+	}
+	
+	public void checkCollisions(Camera cam) {
+		if(lives <= 0) return;
+		
 		//Player to Player and Enemy Bullets, Enemies, Metroids
 		Entity player = this.getEntity("Player");
 		for(Entity e : entities) {
 			if(e.getId().equals("Enemy Bullet") || e.getId().equals("Player Bullet") 
-					|| e.getId().equals("Enemy") || e.getId().equals("Metroid")) {
+					|| e.getId().equals("Enemy") || e.getId().equals("Metroid") || e.getId().equals("Glory")) {
 				if(checkCollision(player, e)){
 					lives--;
 					if(e.getId().equals("Player Bullet")) {
 						displayMessage = true;
 						suicide++;
 					}
+					if(e.getId().equals("Glory")) {
+						glory = true;
+					}
 					this.removeEntity(e);
+					if(lives == 0) {
+						player.removeComponents();
+						return;
+					}
 				}
 			}
 		}
@@ -217,7 +286,7 @@ public class EntityManager {
 							score++;
 							this.removeEntity(e);
 							this.removeEntity(f);
-							this.checkLevelUp();
+							this.checkLevelUp(cam);
 						}
 					}
 					if(f.getId().equals("Enemy Bullet")) {
@@ -271,41 +340,59 @@ public class EntityManager {
 		return mask;
 	}
 	
-	public void checkLevelUp(){
+	public void checkLevelUp(Camera cam){
 		Entity player = this.getEntity("Player");
 		switch(score){
 		case 25: level = 2;
+				 rm.getLevelUp().play();
 				 player.removeComponents("Weapon1");
 				 player.addComponent(new PlayerWeapon2("Weapon2", rm, this));
 				 break;
 		case 50: level = 3;
+				 rm.getLevelUp().play();
 				 player.removeComponents("Weapon2");
 				 player.addComponent(new PlayerWeapon3("Weapon3", rm, this));
 				 break;
 		case 75: level = 4;
+				 rm.getLevelUp().play();
 				 player.removeComponents("Weapon3");
 				 player.addComponent(new PlayerWeapon4("Weapon4", rm, this));
 				 break;
 		case 100:level = 5;
+				 rm.getLevelUp().play();
+				 addGlory(cam);
+				 addGlory(cam);
+				 addGlory(cam);
 				 break;
 		}
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sb, Graphics gr, Camera cam) {
+		if(glory) {
+			Image gloryImage = rm.getImage32(2, 0).getScaledCopy(cam.getScale()*4);
+			gloryImage.draw((gc.getWidth()-gloryImage.getWidth())/2, (gc.getHeight()-gloryImage.getHeight())/2);
+			gr.drawString("You have achieved Glory!", (gc.getWidth()/2)-115, (gc.getHeight()/2)+120);
+		}
+		if(lives <= 0) {
+			gr.drawString("100 lives and you still lose.", (gc.getWidth()/2)-130, (gc.getHeight()/2)+150);
+			gr.drawString("score: " + score + " and " + suicide + " suicides", (gc.getWidth()/2)-120, (gc.getHeight()/2)+180);
+			gr.drawString("  Press 'p' to restart  ", (gc.getWidth()/2)-115, (gc.getHeight()/2)+210);
+		}
+		
 		switch(level){
-		case 1: gr.drawString("Get 100 Points for Glory", gc.getWidth()/2 - 130, 10);
+		case 1: gr.drawString("Get 100 Points for Glory", gc.getWidth()/2 - 115, 10);
 				break;
-		case 2: gr.drawString("Weapon Upgrade! Shoot those Enemies!", gc.getWidth()/2 - 185, 10);
+		case 2: gr.drawString("Weapon Upgrade! Shoot those Enemies!", gc.getWidth()/2 - 170, 10);
 				break;
-		case 3: gr.drawString("More Bullets = More Awesome", gc.getWidth()/2 - 145, 10);
+		case 3: gr.drawString("More Bullets = More Awesome", gc.getWidth()/2 - 130, 10);
 				break;
-		case 4: gr.drawString("Let me help you with another Weapon Upgrade", gc.getWidth()/2 - 215, 10);
+		case 4: gr.drawString("Let me help you with another Weapon Upgrade", gc.getWidth()/2 - 200, 10);
 				break;
-		case 5: gr.drawString("Catch that Glory!", gc.getWidth()/2 - 95, 10);
+		case 5: gr.drawString("Catch that Glory!", gc.getWidth()/2 - 80, 10);
 				break;
 		}
 		
-		if(displayMessage){
+		if(displayMessage && lives > 0){
 			Vector2f pos = new Vector2f(this.getEntity("Player").getPosition());
 			pos.scale(cam.getScale());
 			pos.add(cam.getOffset());
