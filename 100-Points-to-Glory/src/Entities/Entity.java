@@ -8,6 +8,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
+import Game.Camera;
+
 public class Entity {
 
 	private String id;
@@ -87,9 +89,12 @@ public class Entity {
     	}
     }
     
-    public void render(GameContainer gc, StateBasedGame sb, Graphics gr) {
-    	img.setRotation(rotation);
-    	img.draw(pos.getX()-width/2, pos.getY()-height/2);
+    public void render(GameContainer gc, StateBasedGame sb, Graphics gr, Camera cam) {
+    	Image scaled = img.getScaledCopy(cam.getScale());
+    	scaled.setRotation(rotation);
+    	scaled.draw((pos.getX()-width/2)*cam.getScale(),(pos.getY()-height/2)*cam.getScale());
+//    	img.setRotation(rotation);
+//    	img.draw(pos.getX()-width/2, pos.getY()-height/2);
     }
 	
 }
