@@ -37,8 +37,8 @@ public class MyselfVsMe extends BasicGame {
 		
 		//Init player
 		Entity player = new Entity("Player");
-		player.setPosition(new Vector2f(400-16, 400-16));
 		player.setImage(rm.getImage32(0, 0));
+		player.setPosition(new Vector2f((WIDTH-player.getWidth())/2, (HEIGHT-player.getHeight())/2));
 		player.AddComponent(new PlayerComponent("PlayerComponent", rm, em));
 		em.addEntity(player);
 	}
@@ -46,7 +46,7 @@ public class MyselfVsMe extends BasicGame {
 	@Override
 	public void render(GameContainer gc, Graphics gr) throws SlickException {
 		//Draw the background
-		rm.getBackground().draw(0, 0);
+		rm.getBackground().getScaledCopy(cam.getScale()).draw(cam.getOffset().getX(), 0);
 		
 		//Draw all Entities
 		em.render(gc, null, gr, cam);

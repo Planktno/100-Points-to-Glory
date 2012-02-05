@@ -13,7 +13,7 @@ public class Camera {
 		this.width = normalWidth;
 		this.height = normalHeight;
 		this.scale = screenHeight/(float)normalHeight;
-		this.offset = new Vector2f((screenWidth-normalWidth)/2,0);
+		this.offset = new Vector2f((screenWidth-this.scale*normalWidth)/(float)2, 0);
 	}
 	
 	public int getWidth(){
