@@ -1,4 +1,4 @@
-package Game;
+package game;
 
 import org.newdawn.slick.geom.Vector2f;
 

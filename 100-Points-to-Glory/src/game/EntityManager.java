@@ -1,4 +1,4 @@
-package Game;
+package game;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -9,15 +9,16 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
-import Entities.Enemy007;
-import Entities.Enemy1;
-import Entities.EnemyXplode;
-import Entities.Entity;
-import Entities.LineMovement;
-import Entities.PlayerWeapon2;
-import Entities.PlayerWeapon3;
-import Entities.PlayerWeapon4;
-import Entities.TrailMaker;
+import entities.Enemy007;
+import entities.Enemy1;
+import entities.EnemyXplode;
+import entities.Entity;
+import entities.LineMovement;
+import entities.PlayerWeapon2;
+import entities.PlayerWeapon3;
+import entities.PlayerWeapon4;
+import entities.TrailMaker;
+
 
 public class EntityManager {
 	

@@ -1,12 +1,13 @@
-package Entities;
+package entities;
+
+import game.Camera;
+import game.EntityManager;
+import game.ResourceManager;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
-import Game.Camera;
-import Game.EntityManager;
-import Game.ResourceManager;
 
 public class Enemy1 extends Component {
 

@@ -1,10 +1,11 @@
-package Entities;
+package entities;
+
+import game.Camera;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
-import Game.Camera;
 
 public class LineMovement extends Component {
 

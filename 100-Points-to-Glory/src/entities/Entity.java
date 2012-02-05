@@ -1,4 +1,6 @@
-package Entities;
+package entities;
+
+import game.Camera;
 
 import java.util.ArrayList;
 
@@ -8,7 +10,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
-import Game.Camera;
 
 public class Entity {
 

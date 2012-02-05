@@ -1,4 +1,4 @@
-package Game;
+package game;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -8,10 +8,11 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
-import Entities.Entity;
-import Entities.PlayerComponent;
-import Entities.PlayerWeapon1;
-import Entities.TrailMaker;
+import entities.Entity;
+import entities.PlayerComponent;
+import entities.PlayerWeapon1;
+import entities.TrailMaker;
+
 
 public class MyselfVsMe extends BasicGame {
 
