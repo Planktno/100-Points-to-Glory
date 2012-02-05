@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
+import Game.Camera;
 import Game.EntityManager;
 import Game.ResourceManager;
 
@@ -19,7 +20,7 @@ public class Enemy1 extends Component {
 	}
 
 	@Override
-	public void update(GameContainer gc, StateBasedGame sb, int delta) {
+	public void update(GameContainer gc, StateBasedGame sb, int delta, Camera cam) {
 		Vector2f pos = owner.getPosition();
 		Vector2f posPlayer = new Vector2f(em.getEntity("Player").getPosition());
 		angle = posPlayer.sub(pos).getTheta() + 90;

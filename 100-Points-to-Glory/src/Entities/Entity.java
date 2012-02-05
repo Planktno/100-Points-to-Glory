@@ -83,9 +83,9 @@ public class Entity {
     	this.height = img.getHeight();
     }
     
-    public void update(GameContainer gc, StateBasedGame sb, int delta) {
+    public void update(GameContainer gc, StateBasedGame sb, int delta, Camera cam) {
     	for(Component component : components) {
-    		component.update(gc, sb, delta);
+    		component.update(gc, sb, delta, cam);
     	}
     }
     

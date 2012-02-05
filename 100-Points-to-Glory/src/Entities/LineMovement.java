@@ -4,6 +4,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
+import Game.Camera;
+
 public class LineMovement extends Component {
 
 	private float speed;
@@ -18,7 +20,7 @@ public class LineMovement extends Component {
 	}
 
 	@Override
-	public void update(GameContainer gc, StateBasedGame sb, int delta) {
+	public void update(GameContainer gc, StateBasedGame sb, int delta, Camera cam) {
 		Vector2f pos = owner.getPosition();
         pos.x += speed * delta * (float)Math.sin(Math.toRadians(angle));
         pos.y -= speed * delta * (float)Math.cos(Math.toRadians(angle));
@@ -27,7 +29,7 @@ public class LineMovement extends Component {
         	if(pos.getX() <= 0 && angle < 0) {
             	angle = -angle;
             }
-            if(pos.getX() >= gc.getWidth() && angle > 0) {
+            if(pos.getX() >= cam.getWidth() && angle > 0) {
             	angle = -angle;
             }
             
@@ -37,10 +39,10 @@ public class LineMovement extends Component {
             if(pos.getY() <= 0 && angle < 0 && angle > -90) {
             	angle = -(angle + 180);
             }
-            if(pos.getY() >= gc.getHeight() && angle > 90) {
+            if(pos.getY() >= cam.getHeight() && angle > 90) {
             	angle = -(angle - 180);
             }
-            if(pos.getY() >= gc.getHeight() && angle < -90) {
+            if(pos.getY() >= cam.getHeight() && angle < -90) {
             	angle = -(angle + 180);
             }
         }
