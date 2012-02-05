@@ -319,20 +319,22 @@ public class EntityManager {
 	
 	public boolean checkCollision(Entity e1, Entity e2) {
 		// This method detects to see if the images overlap at all. If they do, collision is possible
-		float ax1 = e1.getPosition().getX();
-		float ay1 = e1.getPosition().getY();;
-		float ax2 = ax1 + e1.getWidth();
-		float ay2 = ay1 + e1.getHeight();
-		float bx1 = e2.getPosition().getX();
-		float by1 = e2.getPosition().getY();;
-		float bx2 = bx1 + e2.getWidth();
-		float by2 = by1 + e2.getHeight();
+		float ax1 = e1.getPosition().getX()-3*e1.getWidth()/4;
+		float ay1 = e1.getPosition().getY()-3*e1.getHeight()/4;;
+		float ax2 = ax1 + 3*e1.getWidth()/2;
+		float ay2 = ay1 + 3*e1.getHeight()/2;
+		float bx1 = e2.getPosition().getX()-3*e2.getWidth()/4;
+		float by1 = e2.getPosition().getY()-3*e2.getHeight()/4;
+		float bx2 = bx1 + 3*e2.getWidth()/2;
+		float by2 = by1 + 3*e2.getHeight()/2;
 		
 		if(by2 < ay1 || ay2 < by1 || bx2 < ax1 || ax2 < bx1)
 		{
 			return false; // Collision is impossible.
 		}
 		
+		e1.getImage().setRotation(e1.getRotation());
+		e2.getImage().setRotation(e1.getRotation());
 		HashSet<String> mask1 = getMask(new Vector2f(-e1.getWidth()/2, -e1.getHeight()/2).add(e1.getPosition()), e1.getImage());
 		HashSet<String> mask2 = getMask(new Vector2f(-e2.getWidth()/2, -e2.getHeight()/2).add(e2.getPosition()), e2.getImage());
 
