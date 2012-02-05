@@ -4,27 +4,25 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Music;
-import org.newdawn.slick.ScalableGame;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
 import Entities.Entity;
 import Entities.PlayerComponent;
+import Entities.PlayerWeapon1;
+import Entities.TrailMaker;
 
 public class MyselfVsMe extends BasicGame {
 
 	private static int WIDTH = 1024;
 	private static int HEIGHT = 800;
-	private float scale;
 	
 	private Camera cam;
 	private ResourceManager rm;
 	private EntityManager em;
 	
 	public MyselfVsMe() {
-		super("Myself Vs. Me - A Game by Planktno");
+		super("Myself Vs. Me - A Game by Planktno & Diko");
 	}
 	
 	public void setCamera(int normalWidth, int normalHeight, int screenWidth, int screenHeight) {
@@ -41,10 +39,11 @@ public class MyselfVsMe extends BasicGame {
 		Entity player = new Entity("Player");
 		player.setImage(rm.getImage32(0, 0));
 		player.setPosition(new Vector2f((WIDTH-player.getWidth())/2, (HEIGHT-player.getHeight())/2));
-		player.AddComponent(new PlayerComponent("PlayerComponent", rm, em));
+		player.addComponent(new PlayerComponent("PlayerComponent", rm, em));
+		player.addComponent(new TrailMaker("Player Trail Maker", rm, em));
+		player.addComponent(new PlayerWeapon1("Weapon1", rm, em));
 		em.addEntity(player);
-		rm.getNyan().play();
-		
+		rm.getNyan().play();	
 	}
 	
 	@Override
@@ -56,9 +55,9 @@ public class MyselfVsMe extends BasicGame {
 		em.render(gc, null, gr, cam);
 		
 		//Draw Strings of relevant information
-		gr.drawString("Score: " + em.getScore() , gc.getWidth()-120, 10);
-		gr.drawString("Level: " + em.getLevel() , gc.getWidth()-220, 10);
-		gr.drawString("Lives: " + em.getLives() , 10, 10);
+		gr.drawString("Score: " + em.getScore() , cam.getOffset().getX()+cam.getWidth()*cam.getScale()-120, 10);
+		gr.drawString("Level: " + em.getLevel() , cam.getOffset().getX()+cam.getWidth()*cam.getScale()-220, 10);
+		gr.drawString("Lives: " + em.getLives() , cam.getOffset().getX()+10, 10);
 	}
 
 	@Override
@@ -77,7 +76,8 @@ public class MyselfVsMe extends BasicGame {
 		AppGameContainer app = new AppGameContainer( game );
 		game.setCamera(WIDTH, HEIGHT, app.getScreenWidth(), app.getScreenHeight());
         app.setDisplayMode(app.getScreenWidth(), app.getScreenHeight(), true);
-        app.setShowFPS(false);
+        app.setTargetFrameRate(60);
+        //app.setShowFPS(false);
         app.start();
 	}
 

@@ -20,7 +20,7 @@ public class PlayerTrail extends Component{
 	@Override
 	public void update(GameContainer gc, StateBasedGame sb, int delta, Camera cam) {
 		count += delta;
-		owner.getImage().setAlpha(1-count/(float)timer);
+		owner.setAlpha(1-count/(float)timer);
 		if(count >= timer){
 			em.removeEntity(owner);
 		}

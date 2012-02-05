@@ -25,7 +25,7 @@ public class Enemy007 extends Component {
         if (time>=10000/fireRate){
         	time=0;
         	
-        	Entity bullet = new Entity("Bullet");
+        	Entity bullet = new Entity("Enemy Bullet");
         	Vector2f pos = owner.getPosition();
     		Vector2f posPlayer = new Vector2f(em.getEntity("Player").getPosition());
     		float angle = (float)posPlayer.sub(pos).getTheta() + 90;
@@ -33,7 +33,7 @@ public class Enemy007 extends Component {
         	float addXBullet =  20 * (float)Math.sin(Math.toRadians(angle));
         	float addYBullet = -20 * (float)Math.cos(Math.toRadians(angle));
         	bullet.setPosition(new Vector2f(pos.getX()+addXBullet, pos.getY()+addYBullet));
-        	bullet.AddComponent(new LineMovement("BulletMovement", 0.5f, angle, true));
+        	bullet.addComponent(new LineMovement("BulletMovement", 0.5f, angle, true));
         	em.addEntity(bullet);
         }
    	}

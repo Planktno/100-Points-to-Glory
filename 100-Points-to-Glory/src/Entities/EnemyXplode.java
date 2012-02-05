@@ -42,14 +42,14 @@ public class EnemyXplode extends Component {
         
         if(time <= 0) {
         	for(int i = 0; i < bullets; i++) {
-            	Entity bullet = new Entity("Bullet");
+            	Entity bullet = new Entity("Enemy Bullet");
             	Vector2f pos = owner.getPosition();
             	float angle = 360*i/(float)bullets;
             	bullet.setImage(rm.getImage04(2, 9));
             	float addXBullet =  20 * (float)Math.sin(Math.toRadians(angle));
             	float addYBullet = -20 * (float)Math.cos(Math.toRadians(angle));
             	bullet.setPosition(new Vector2f(pos.getX()+addXBullet, pos.getY()+addYBullet));
-            	bullet.AddComponent(new LineMovement("BulletMovement", 0.5f, angle, true));
+            	bullet.addComponent(new LineMovement("BulletMovement", 0.5f, angle, true));
             	em.addEntity(bullet);
         	}
         	em.removeEntity(owner);

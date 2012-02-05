@@ -17,19 +17,11 @@ public class PlayerComponent extends Component{
 	private float angle;
 	private static float ANGLESPEED = 0.2f;
 	
-	private static int COOLDOWN = 200;
-	private int timeSinceLastShot;
-	
-	private static int TRAILCOOLDOWN = 10;
-	private int timeSinceLastTrail;
-	
 	public PlayerComponent(String id, ResourceManager rm, EntityManager em) {
 		super(id, rm, em);
 		
 		speed = 0;
 		angle = 0;
-		timeSinceLastShot = 0;
-		timeSinceLastTrail = 0;
 	}
 	
 	@Override
@@ -89,43 +81,7 @@ public class PlayerComponent extends Component{
             if(pos.getY() <= 0 && angle < -90) angle = -(angle + 180);
             if(pos.getY() >= cam.getHeight() && angle >= 0 && angle < 90) angle = -(angle - 180);
             if(pos.getY() >= cam.getHeight() && angle < 0 && angle > -90) angle = -(angle + 180);
-        }
-
-        
-        //Trail
-        if(timeSinceLastTrail < TRAILCOOLDOWN) timeSinceLastTrail += delta;
-        else {
-        	timeSinceLastTrail = 0;
-        	Entity trailLeft = new Entity("Player Trail Left");
-        	Entity trailRight = new Entity("Player Trail Right");
-        	trailLeft.setImage(rm.getImage04(4, 9));
-        	trailRight.setImage(rm.getImage04(4, 9));
-        	float addXTrailLeft = -16 * (float)Math.sin(Math.toRadians(angle + 25));
-        	float addYTrailLeft = 16 * (float)Math.cos(Math.toRadians(angle  + 25));
-        	float addXTrailRight = -16 * (float)Math.sin(Math.toRadians(angle- 25));
-        	float addYTrailRight = 16 * (float)Math.cos(Math.toRadians(angle - 25));
-        	trailLeft.setPosition(new Vector2f(pos.getX()+addXTrailLeft, pos.getY()+addYTrailLeft));
-        	trailRight.setPosition(new Vector2f(pos.getX()+addXTrailRight, pos.getY()+addYTrailRight));
-        	trailLeft.AddComponent(new PlayerTrail("Player Trail Timer", rm, em, 100));
-        	trailRight.AddComponent(new PlayerTrail("Player Trail Timer", rm, em, 100));
-        	em.addEntity(trailLeft);
-        	em.addEntity(trailRight);
-        }
- 
-        //Attacking
-        if(timeSinceLastShot < COOLDOWN) timeSinceLastShot += delta;
-        
-        if(input.isKeyDown(Input.KEY_SPACE) && timeSinceLastShot >= COOLDOWN) {
-        	timeSinceLastShot = 0;
-        	
-        	Entity bullet = new Entity("Bullet");
-        	bullet.setImage(rm.getImage04(0, 9));
-        	float addXBullet =  20 * (float)Math.sin(Math.toRadians(angle));
-        	float addYBullet = -20 * (float)Math.cos(Math.toRadians(angle));
-        	bullet.setPosition(new Vector2f(pos.getX()+addXBullet, pos.getY()+addYBullet));
-        	bullet.AddComponent(new LineMovement("BulletMovement", 0.5f, angle, true));
-        	em.addEntity(bullet);
-        }
+        }       
 	}
 
 }
